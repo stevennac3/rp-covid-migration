@@ -4,4 +4,4 @@ Project focused on analyzing NYC outflows/inflows to the region and U.S. pre- an
 
 Datasets:
 SafeGraph SocialDistancing
-{others tbd}
+others {tbd}
