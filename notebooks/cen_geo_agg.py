@@ -20,7 +20,7 @@ def calculate_sumgeo(df,sumgeo):
         for v in var:
             e = dff[f'{v}E'].sum()
             if f'{v}M' not in dff.columns:
-                m = np.nan
+                m = 0
             else:
                 m = math.sqrt(dff[f'{v}M'].apply(lambda x: x**2).sum())
             if m == 0 or e == 0:
@@ -34,10 +34,17 @@ def calculate_sumgeo(df,sumgeo):
     r = pd.DataFrame(results)
     return r
 
-def calc_muni_agg(df,sumgeo):
+def calc_basic_agg(df,sumgeo):
     variables = list(df.columns[1:])
-    var = list(set([i.replace('E', '')\
-                .replace('M', '') for i in variables]))
+    var = set()
+    for i in variables:
+        if i[-1] == 'E' or i[-1] == 'M':
+            i = i[:-1]
+            var.add(i)
+        else:
+            var.add(i)
+    
+    var = list(var)
     results = []
     for i in df[sumgeo].unique():
         dff = df[df[sumgeo] == i]

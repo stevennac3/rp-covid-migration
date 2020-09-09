@@ -7,19 +7,19 @@ def get_moe(m):
 
 def get_cv(e, m): 
     if e == 0:
-        return np.nan
+        return 0
     else:
         return np.absolute(m/1.645/e*100)
     
 def get_pct(e,agg_e):
     if agg_e == 0:
-        return np.nan
+        return 0
     else:
         return e/agg_e
 
 def get_pctmoe(e,m,agg_e,agg_m): 
     if agg_e == 0:
-        return np.nan
+        return 0
     else: 
         result = (1/agg_e) * math.sqrt((m**2)-(((e/agg_e)**2)*(agg_m**2)))
         return result
