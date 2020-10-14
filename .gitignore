@@ -16,3 +16,12 @@ env.bak/
 venv.bak/
 
 **/.DS_Store
+notebooks/data/csvs/daily_nycto_us_county_outflow 201009.csv
+notebooks/data/csvs/devicecount_uscounties_201003.csv
+notebooks/data/csvs/full_device_check_uscounties.csv
+notebooks/data/csvs/inflow_coxco.csv
+notebooks/data/csvs/inflow_unique-orig-fips.csv
+notebooks/Get SG Data/output/Destinations/dest_coxco_daily_1009.xlsx
+notebooks/Get SG Data/output/Device Counts/candidatedevice_UScounties_daily.xlsx
+notebooks/Get SG Data/output/Device Counts/comphome_UScounties_daily.xlsx
+notebooks/Get SG Data/output/Device Counts/device_UScounties_daily.xlsx
