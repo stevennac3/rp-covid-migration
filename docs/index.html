@@ -56,15 +56,17 @@
   </div>
 
   <div id="maps" class="site-main">
-    <div class="char-select" role="group" aria-label="...">
-      <button 
-        v-for="map in maps" 
-        :key="map.name" 
-        class="button gray small"
-        v-on:click="selected = map.name"
-      >
-        {{ map.name }}
-      </button>
+    <div class="grid-container">
+      <div class="char-select" role="group" aria-label="...">
+        <button 
+          v-for="map in maps" 
+          :key="map.name" 
+          class="button gray small"
+          v-on:click="selected = map.name"
+        >
+          {{ map.name }}
+        </button>
+      </div>
     </div>
     
     <div class="grid-container">
