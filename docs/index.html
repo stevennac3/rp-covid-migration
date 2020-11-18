@@ -64,22 +64,26 @@
           class="button gray small"
           v-on:click="selected = map.name"
         >
-          {{ map.name }}
+          {{ map.friendly_name }}
         </button>
       </div>
     </div>
     
     <div class="grid-container">
-      <iframe 
-          v-for="map in maps" 
-          v-if="selected == map.name"
-          :key="map.name"
+      <div   
+        v-for="map in maps" 
+        v-if="selected == map.name"
+        :key="map.name"
+      >
+        <h1> {{ map.friendly_name }} </h1>
+        <p> {{ map.description }}</p>
+        <iframe 
           :src="map.url"
           height="1000px" width="100%"
           style="border:none;"
           title="map.name"
-      >
-      </iframe>
+        ></iframe>
+      </div>
     </div>
 
   </div>
@@ -117,18 +121,26 @@
         maps: [
           {
             name: 'subplace_nyc',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_nyc.html'
           },
           {
             name: 'subplace_returns',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_returns.html'
           },
           {
             name: 'UScounty_nyc',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
           },
           {
             name: 'pct_time_away',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/pct_time_away.html'
           }
         ]
