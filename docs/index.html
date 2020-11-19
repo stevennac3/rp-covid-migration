@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NYC Planning Migration Vizualization</title>
+  <meta content="NYC Planning Migration Vizualization" name="description">
+  <meta content="NYC Planning Labs" name="author">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@nycplanning" />
+  <meta name="twitter:creator" content="@nycplanninglabs" />
+  <meta name="twitter:title" content="NYC Planning Migration Vizualization" />
+  <meta name="twitter:description" content="An interactive visualization of historic U.S. Census migration data for NYC" />
+  <meta name="twitter:image" content="https://migration.planning.nyc.gov/img/screenshot-1200x628.png" />
+
+  <!-- Facebook / Open Graph tags -->
+  <meta property="og:title" content="NYC Planning Migration Vizualization" />
+  <meta property="og:description" content="An interactive visualization of historic U.S. Census migration data for NYC" />
+  <meta property="og:image" content="https://migration.planning.nyc.gov/img/screenshot-1200x628.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="628" />
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://migration.planning.nyc.gov/css/labs-foundation.css">
+  <link rel="stylesheet" href="https://migration.planning.nyc.gov/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <!-- END TRACKJS -->
+</head>
+<body>
+
+  <div class="site-header">
+
+    <header role="banner">
+      <!-- <a href="https://planninglabs.nyc/" class="labs-beta-notice hide-for-print">A beta project of NYC Planning Labs</a> -->
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="branding cell auto">
+            <a class="dcp-link" href="http://www1.nyc.gov/site/planning/index.page"><img class="dcp-logo" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="NYC Planning"></a>
+            <a href="." class="site-name">
+              NYC COVID-19 Migration
+            </a>
+          </div>
+          <div class="cell shrink show-for-large">
+            <nav role="navigation">
+              <ul class="vertical large-horizontal menu">
+                <li><a href="https://github.com/NYCPlanning/labs-migration-viz" target="_blank">Github</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+  </div>
+
+  <div id="maps" class="site-main">
+    <div class="grid-container">
+      <div class="char-select" role="group" aria-label="...">
+        <button 
+          v-for="map in maps" 
+          :key="map.name" 
+          class="button gray small"
+          v-on:click="selected = map.name"
+        >
+          {{ map.friendly_name }}
+        </button>
+      </div>
+    </div>
+    
+    <div class="grid-container">
+      <div   
+        v-for="map in maps" 
+        v-if="selected == map.name"
+        :key="map.name"
+      >
+        <h1> {{ map.friendly_name }} </h1>
+        <p> {{ map.description }}</p>
+        <iframe 
+          :src="map.url"
+          height="1000px" width="100%"
+          style="border:none;"
+          title="map.name"
+        ></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="site-footer">
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="cell shrink">
+
+          <p><a href="http://www1.nyc.gov/site/planning/index.page"><img class="logo" style="width:80px;" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="DCP"></a></p>
+
+        </div>
+        <div class="cell auto text-small ">
+
+          <p class="dark-gray" style="margin-bottom:0.5rem;">A project by NYC Department of City Planning's Reginal Planning Division</p>
+
+          <a href="https://github.com/NYCPlanning/labs-migration-viz/issues/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Report a bug</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://use.fontawesome.com/46fa1fbe2f.js"></script>
+  <script>
+    var maps = new Vue({
+      el: "#maps",
+      data: {
+        selected: 'subplace_nyc',
+        maps: [
+          {
+            name: 'subplace_nyc',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_nyc.html'
+          },
+          {
+            name: 'subplace_returns',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_returns.html'
+          },
+          {
+            name: 'UScounty_nyc',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
+          },
+          {
+            name: 'pct_time_away',
+            friendly_name: 'some fancy names',
+            description: 'some description here',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/pct_time_away.html'
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
