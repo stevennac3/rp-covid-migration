@@ -39,13 +39,13 @@
           <div class="branding cell auto">
             <a class="dcp-link" href="http://www1.nyc.gov/site/planning/index.page"><img class="dcp-logo" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="NYC Planning"></a>
             <a href="." class="site-name">
-              NYC COVID-19 Migration
+              CoVID-19 and NYC Mobility Trends
             </a>
           </div>
           <div class="cell shrink show-for-large">
             <nav role="navigation">
               <ul class="vertical large-horizontal menu">
-                <li><a href="https://github.com/NYCPlanning/labs-migration-viz" target="_blank">Github</a></li>
+          <!--      <li><a href="https://github.com/NYCPlanning/labs-migration-viz" target="_blank">Github</a></li> -->
               </ul>
             </nav>
           </div>
@@ -54,18 +54,39 @@
     </header>
 
   </div>
+  <div class="site-main">
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class = "cell large-8 text-small">
+          <h3>Exploring the Geography of Travel Patterns</h3>
+            <p>Among its many impacts, COVID-19 has significantly influenced NYC metropolitan region mobility patterns. Large-scale adoption of remote-work and education, temporary and/or permanent resident relocation, disruption of the tourism and hospitality industries, and other factors have resulted in considerable shifts for how people travel to and from NYC.</p>
+              Using anonymous samples of mobile device-generated geolocation data provided by SafeGraph, NYC Planning has mapped the general patterns of where NYC residents have traveled to in the surrounding NYC metropolitan region and United States, as well as travel to NYC from the metropolitan region, in the months before and during COVID-19. We also explore the travel tendencies of NYC residents by their home neighborhood during the months marking the height of the first wave of the pandemic, March through May 2020. It is important to note that these patterns do not cover mobility trends within NYC, which accounts for the majority of NYC residents’ trip destinations both before and during COVID
+            
+            </p>
+            <div>
+              <h3 class="header-medium char-header">Navigating the Maps</h2>
+            </div>
+            <p>By selecting map visualizations indicated on the tabs below, you can observe daily travel patterns by animating the time slider below the map, or by dragging the time slider to a specific date. You can also hover over the map geographies for more information, or toggle information on and off in the map legend.  </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
   <div id="maps" class="site-main">
     <div class="grid-container">
-      <div class="char-select" role="group" aria-label="...">
-        <button 
-          v-for="map in maps" 
-          :key="map.name" 
-          class="button gray small"
-          v-on:click="selected = map.name"
-        >
-          {{ map.friendly_name }}
-        </button>
+      <div class = "cell large-5 text-small">
+        <div class="char-select" role="group" aria-label="...">
+          <button 
+            v-for="map in maps" 
+            :key="map.name" 
+            class="button gray small"
+            v-on:click="selected = map.name"
+          >
+            {{ map.friendly_name }}
+          </button>
+        </div>
       </div>
     </div>
     
@@ -75,19 +96,20 @@
         v-if="selected == map.name"
         :key="map.name"
       >
-        <h1> {{ map.friendly_name }} </h1>
-        <p> {{ map.description }}</p>
+        <h4 class="header-large char-header">{{ map.title }} </h4>
+        <p>{{map.description}}</p>
         <iframe 
           :src="map.url"
-          height="1000px" width="100%"
+          height="900px" width="100%"
           style="border:none;"
           title="map.name"
         ></iframe>
+        <p> {{ map.description1 }}</p>
       </div>
     </div>
 
   </div>
-
+<!--    STILL NEED GUIDANCE ON: removing white spaces, adding break lines in title text, altering title text...-->
   <div class="site-footer">
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
@@ -98,7 +120,7 @@
         </div>
         <div class="cell auto text-small ">
 
-          <p class="dark-gray" style="margin-bottom:0.5rem;">A project by NYC Department of City Planning's Reginal Planning Division</p>
+          <p class="dark-gray" style="margin-bottom:0.5rem;">A project by NYC Department of City Planning's Regional Planning Division ❤️</p>
 
           <a href="https://github.com/NYCPlanning/labs-migration-viz/issues/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Report a bug</a>
 
@@ -121,26 +143,31 @@
         maps: [
           {
             name: 'subplace_nyc',
-            friendly_name: 'some fancy names',
-            description: 'some description here',
+            friendly_name: 'NYC ➜ Region',
+            title: 'Where NYC Residents Traveled in the Surrounding Metropolitan Region ',
+            description: 'this is 1',
+            description1:'noa',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_nyc.html'
           },
           {
             name: 'subplace_returns',
-            friendly_name: 'some fancy names',
-            description: 'some description here',
+            friendly_name: 'Region ➜ NYC',
+            title:'Where Regional Residents Traveled from in the Surrounding Metropolitan Region',
+            description: 'this is 2',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_returns.html'
           },
           {
             name: 'UScounty_nyc',
-            friendly_name: 'some fancy names',
-            description: 'some description here',
+            friendly_name: 'NYC ➜ US',
+            title: 'Where NYC Residents Traveled to in the U.S. (2019 vs. 2020)',
+            description: 'this is 3',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
           },
           {
             name: 'pct_time_away',
-            friendly_name: 'some fancy names',
-            description: 'some description here',
+            friendly_name: 'NYC Neighborhood ',
+            title: 'Percent of Residents Away from Home > 22 hours By Neighborhood',
+            description: 'this is 4',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/pct_time_away.html'
           }
         ]
