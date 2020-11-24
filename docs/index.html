@@ -60,13 +60,13 @@
         <div class = "cell large-8 text-small">
           <h3>Exploring the Geography of Travel Patterns</h3>
             <p>Among its many impacts, COVID-19 has significantly influenced NYC metropolitan region mobility patterns. Large-scale adoption of remote-work and education, temporary and/or permanent resident relocation, disruption of the tourism and hospitality industries, and other factors have resulted in considerable shifts for how people travel to and from NYC.</p>
-              Using anonymous samples of mobile device-generated geolocation data provided by SafeGraph, NYC Planning has mapped the general patterns of where NYC residents have traveled to in the surrounding NYC metropolitan region and United States, as well as travel to NYC from the metropolitan region, in the months before and during COVID-19. We also explore the travel tendencies of NYC residents by their home neighborhood during the months marking the height of the first wave of the pandemic, March through May 2020. It is important to note that these patterns do not cover mobility trends within NYC, which accounts for the majority of NYC residents’ trip destinations both before and during COVID
+              Using anonymous samples of mobile device-generated geolocation data provided by SafeGraph, NYC Planning has mapped the general patterns of where NYC residents have traveled to in the surrounding NYC metropolitan region and United States, as well as travel to NYC from the metropolitan region, in the months before and during COVID-19. We also explore the travel tendencies of NYC residents by their home neighborhood during the months marking the height of the first wave of the pandemic, March through May 2020. It is important to note that these patterns do not cover mobility trends within NYC, which accounts for the majority of NYC residents’ trip destinations both before and during COVID.
             
             </p>
             <div>
               <h3 class="header-medium char-header">Navigating the Maps</h2>
             </div>
-            <p>By selecting map visualizations indicated on the tabs below, you can observe daily travel patterns by animating the time slider below the map, or by dragging the time slider to a specific date. You can also hover over the map geographies for more information, or toggle information on and off in the map legend.  </p>
+            <p>By selecting map visualizations indicated on the tabs below, you can observe daily and weekly travel patterns by animating the time slider below the map, or by dragging the time slider to a specific date. You can also hover over the map geographies for more information, or toggle information on and off in the map legend.  </p>
           </div>
         </div>
       </div>
@@ -89,27 +89,30 @@
         </div>
       </div>
     </div>
-    
     <div class="grid-container">
-      <div   
+      <div class="grid-x grid-padding-x">
+        <div   
         v-for="map in maps" 
         v-if="selected == map.name"
         :key="map.name"
-      >
-        <h4 class="header-large char-header">{{ map.title }} </h4>
-        <p>{{map.description}}</p>
-        <iframe 
-          :src="map.url"
-          height="900px" width="100%"
-          style="border:none;"
-          title="map.name"
-        ></iframe>
-        <p> {{ map.description1 }}</p>
+        >
+          <div class="grid-x grid-padding-x"> 
+            <h4 class="header-large char-header">{{ map.title }} </h4>
+            <p class="cell large-8 text-small">{{map.description}}</p>
+            <iframe 
+            :src="map.url"
+            height="900px" width="100%"
+            style="border:none;"
+            title="map.name"
+            ></iframe>
+            
+            <!-- REMOVE THE WHITESPACE under Iframe and subtext HERE!!-->
+            <p class="cell large-8 text-small">{{ map.description1 }}</p>
+          </div>
+        </div>
       </div>
-    </div>
-
   </div>
-<!--    STILL NEED GUIDANCE ON: removing white spaces, adding break lines in title text, altering title text...-->
+<!--    STILL NEED GUIDANCE ON: adding hyperlink in text box within descriptions-->
   <div class="site-footer">
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
@@ -139,29 +142,31 @@
     var maps = new Vue({
       el: "#maps",
       data: {
-        selected: 'subplace_nyc',
+        selected: 'UScounty_nyc',
         maps: [
+          {
+            name: 'UScounty_nyc',
+            friendly_name: 'NYC ➜ US',
+            title: 'Where NYC Residents Traveled to in the U.S. (2019 vs. 2020)',
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map shows where NYC residents have traveled daily in 2019 compared to 2020. The bubble size represents a scaled number of trips to each respective county. ',
+            description1: 'Viewing this map you can see a typical yearly resident travel pattern compared to the travel patterns impacted by COVID. You can see in late March and Early April the stark contrast in travel patterns, as 2019 circle radii engulf most counties in the contiguous United States. We can also see the disparity in people staying in the region compared to the rest of the county. Nearly half **need a numerical reference here** of people who left NYC seem to have remained in the region. Looking at seasonal patterns, you can see the I-95 corridor in the southeast most notably in February, likely indicating the connection between NYC and Florida vacation patterns??',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
+          },
           {
             name: 'subplace_nyc',
             friendly_name: 'NYC ➜ Region',
             title: 'Where NYC Residents Traveled in the Surrounding Metropolitan Region ',
-            description: 'this is 1',
-            description1:'noa',
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map showcases NYC residents’ travel patterns out of the city to municipalities in the surrounding metropolitan region, scaled by the number of trips and colored by borough of residence.',
+            description1:'Before and during COVID-19, trips to the region accounted for just 2% to 10% of NYC residents’ total trips. The trends are quite consistent with the travel patterns documented in our 2019 report The Ins and Outs of NYC Commuting. Notably, there is a clear relationship between adjacency and NYC residents’ travel tendencies. That is to say, Staten Island residents are more likely to travel to northern New Jersey, Queens residents tend to travel to Nassau County, and so forth. At the peak of COVID-19 in March to May, some key travel patterns observed are the general decline in trips to the region overall, but a more mobile outflow of Manhattan residents to areas around the region versus other NYC residents, most notably to the south fork of Long Island.',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_nyc.html'
           },
           {
             name: 'subplace_returns',
             friendly_name: 'Region ➜ NYC',
             title:'Where Regional Residents Traveled from in the Surrounding Metropolitan Region',
-            description: 'this is 2',
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map represents NYC metropolitan region residents’ travel to New York City by home municipality, scaled by the number of trips and colored by their destination in NYC. ',
+            description1: 'Manhattan is the primary destination for most regional residents prior to the pandemic, with a clear drop-off in regional residents’ trips to the city starting in mid-March when shelter-in-place orders went into effect. The only exception appears to be continued travel to Queens by residents of adjacent Nassau County municipalities. By late summer, travel to Manhattan appears to pick back up, but remains below pre-COVID trip levels from most areas except the south fork of Long Island, which has a more sizeable exchange of residents traveling to Manhattan. This area is a known second-home location for NYC (mostly Manhattan) residents',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_returns.html'
-          },
-          {
-            name: 'UScounty_nyc',
-            friendly_name: 'NYC ➜ US',
-            title: 'Where NYC Residents Traveled to in the U.S. (2019 vs. 2020)',
-            description: 'this is 3',
-            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
           },
           {
             name: 'pct_time_away',
