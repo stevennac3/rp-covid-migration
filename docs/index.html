@@ -82,7 +82,7 @@
             v-for="map in maps" 
             :key="map.name" 
             class="button gray small"
-            v-on:click="selected = map.name"
+            v-on:click = "selected = map.name"
           >
             {{ map.friendly_name }}
           </button>
@@ -96,15 +96,19 @@
         v-if="selected == map.name"
         :key="map.name"
       >
-        <h4 class="header-large char-header">{{ map.title }} </h4>
-        <p>{{map.description}}</p>
+        <h4 class="header-medium char-header">{{map.title}} </h4>
+          <div class = "grid-x grid-padding-x">
+            <p class = "cell large-8 text-small">{{map.description}}</p>
+          </div>
         <iframe 
           :src="map.url"
-          height="900px" width="100%"
+          height="800px" width="100%"
           style="border:none;"
           title="map.name"
         ></iframe>
-        <p> {{ map.description1 }}</p>
+        <div class = "grid-x grid-padding-x">
+          <p class = "cell large-8 text-small">{{map.description1}}</p>
+        </div>
       </div>
     </div>
 
@@ -122,7 +126,7 @@
 
           <p class="dark-gray" style="margin-bottom:0.5rem;">A project by NYC Department of City Planning's Regional Planning Division ❤️</p>
 
-          <a href="https://github.com/NYCPlanning/labs-migration-viz/issues/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Report a bug</a>
+          <a href="https://github.com/NYCPlanning/labs-migration-viz/issues/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Report a bug 🐞</a>
 
         </div>
       </div>
@@ -139,35 +143,38 @@
     var maps = new Vue({
       el: "#maps",
       data: {
-        selected: 'subplace_nyc',
+        selected: 'UScounty_nyc',
         maps: [
+        {
+            name: 'UScounty_nyc',
+            friendly_name: 'NYC ➜ US',
+            title: 'Where NYC Residents Traveled to in the U.S. (2019 vs. 2020)',
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map shows where NYC residents have traveled daily in 2019 compared to 2020. The bubble size represents a scaled number of trips to each respective county. ',
+            description1:'Viewing this map you can see a typical yearly resident travel pattern compared to the travel patterns impacted by COVID. You can see in late March and Early April the stark contrast in travel patterns, as 2019 circle radii engulf most counties in the contiguous United States. We can also see the disparity in people staying in the region compared to the rest of the county. Nearly half **need a numerical reference here** of people who left NYC seem to have remained in the region. Looking at seasonal patterns, you can see the I-95 corridor in the southeast most notably in February, likely indicating the connection between NYC and Florida vacation patterns in winter months.',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/NYC_to_UScounty.html'
+          },
           {
             name: 'subplace_nyc',
             friendly_name: 'NYC ➜ Region',
             title: 'Where NYC Residents Traveled in the Surrounding Metropolitan Region ',
-            description: 'this is 1',
-            description1:'noa',
-            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_nyc.html'
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map showcases NYC residents’ travel patterns out of the city to municipalities in the surrounding metropolitan region, scaled by the number of trips and colored by borough of residence.',
+            description1:'Before and during COVID-19, trips to the region accounted for just 2% to 10% of NYC residents’ total trips. The trends are quite consistent with the travel patterns documented in our 2019 report <a v-bind:href="https://www1.nyc.gov/assets/planning/download/pdf/planning-level/housing-economy/nyc-ins-and-out-of-commuting.pdf"> The Ins and Outs of NYC Commuting</a>',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/nyc_to_subplace.html'
           },
           {
             name: 'subplace_returns',
             friendly_name: 'Region ➜ NYC',
             title:'Where Regional Residents Traveled from in the Surrounding Metropolitan Region',
-            description: 'this is 2',
-            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_returns.html'
-          },
-          {
-            name: 'UScounty_nyc',
-            friendly_name: 'NYC ➜ US',
-            title: 'Where NYC Residents Traveled to in the U.S. (2019 vs. 2020)',
-            description: 'this is 3',
-            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/UScounty_nyc.html'
+            description: 'Looking at January 1, 2020 to September 30, 2020, this map represents NYC metropolitan region residents’ travel to New York City by home municipality, scaled by the number of trips and colored by their destination in NYC.',
+            description1: 'Manhattan is the primary destination for most regional residents prior to the pandemic, with a clear drop-off in regional residents’ trips to the city starting in mid-March when shelter-in-place orders went into effect. The only exception appears to be continued travel to Queens by residents of adjacent Nassau County municipalities. By late summer, travel to Manhattan appears to pick back up, but remains below pre-COVID trip levels from most areas except the south fork of Long Island, which has a more sizeable exchange of residents traveling to Manhattan. This area is a known second-home location for NYC (mostly Manhattan) residents.',
+            url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/subplace_to_nyc.html'
           },
           {
             name: 'pct_time_away',
             friendly_name: 'NYC Neighborhood ',
             title: 'Percent of Residents Away from Home > 22 hours By Neighborhood',
-            description: 'this is 4',
+            description: 'Looking at aggregated average values from week of January 1st to Week of September 29th, this map shows the percentage of NYC residents that spent ‘time away’ throughout the year.',
+            description1: 'TBD',
             url: 'https://recovery-data-partnership.nyc3.digitaloceanspaces.com/pct_time_away.html'
           }
         ]
